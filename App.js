@@ -34,7 +34,7 @@ export default class App extends Component {
       mode: 'play',
       whiteTime: prevState.timeControl,
       blackTime: prevState.timeControl,
-      activePlayer: 1
+      activePlayer: 0
     }) );
   }
 
@@ -52,6 +52,13 @@ export default class App extends Component {
       timeControl: this.state.timeControl,
     };
 
+    const playSettings = {
+      boardPosition: this.state.boardPosition, 
+      whiteTime: this.state.whiteTime,
+      blackTime: this.state.blackTime,
+      activePlayer: this.state.activePlayer, 
+    }
+
     switch ( this.state.mode ) {
       case 'start':
         return(
@@ -60,7 +67,7 @@ export default class App extends Component {
         break;
       case 'play':
         return(
-          <Play />
+          <Play settings={playSettings} />
         )
         break;
       case 'result':
