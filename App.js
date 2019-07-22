@@ -16,6 +16,7 @@ export default class App extends Component {
       activePlayer: -1, // -1 to pause game, 0 for black to decrement, 1 for white to decrement
     }
 
+    this.backToStart = this.backToStart.bind(this);
     this.beginPlay = this.beginPlay.bind(this);
     this.handleTap = this.handleTap.bind(this);
     this.toggleBoardPosition = this.toggleBoardPosition.bind(this);
@@ -29,6 +30,15 @@ export default class App extends Component {
       justifyContent: 'center',
     },
   });
+
+  backToStart(){
+    this.setState({
+      mode: 'start',
+      whiteTime: 0,
+      blackTime: 0,
+      activePlayer: -1,
+    });
+  }
 
   beginPlay(){
     this.setState(prevState => ({
@@ -67,6 +77,7 @@ export default class App extends Component {
       blackTime: this.state.blackTime,
       activePlayer: this.state.activePlayer, 
       onTap: this.handleTap,
+      backToStart: this.backToStart
     }
 
     switch ( this.state.mode ) {
