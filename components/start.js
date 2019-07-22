@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import moment from 'moment';
 
 export default function Start( props ) {
-  const {boardPosition, onBoardPositionChange} = props;
+  const {boardPosition, onBoardPositionChange, timeControl} = props.settings;
 
   return (
     <View style={styles.container}>
-      <Text>Hello, start!</Text>
+      <Text>Time control is: {moment.duration(timeControl, 'seconds').asMinutes()} minutes.</Text>
       <Button onPress={() => onBoardPositionChange()} title="Toggle Board Position"></Button>
       <Text>Board position is {boardPosition ? `Right` : `Left`}</Text>
     </View>

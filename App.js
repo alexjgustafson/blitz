@@ -34,13 +34,17 @@ export default class App extends Component {
     } ) )
   }
 
-  render(){
-    const {boardPosition, mode} = this.state;
-    
-    switch ( mode ) {
+  render(){    
+    const startSettings = {
+      boardPosition: this.state.boardPosition,
+      onBoardPositionChange: this.toggleBoardPosition,
+      timeControl: this.state.timeControl,
+    };
+
+    switch ( this.state.mode ) {
       case 'start':
         return(
-          <Start boardPosition={boardPosition} onBoardPositionChange={this.toggleBoardPosition} />
+          <Start settings={startSettings} />
         )
         break;
       case 'play':
