@@ -6,7 +6,7 @@ export default function Play( props ) {
   const styles = StyleSheet.create({
     black: {
       flex: 1,
-      backgroundColor: '#000',
+      backgroundColor: '#333',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -29,10 +29,10 @@ export default function Play( props ) {
 
   return (
     <>
-    <TouchableHighlight style={styles.white} onPress={ () => onTap(1) }>
+    <TouchableHighlight style={styles.white} onPress={ () => onTap(1) } underlayColor='#ccc'>
       <Text style={styles.whiteText}>{ activePlayer ? '♔' : ''}{whiteTime}</Text>
     </TouchableHighlight>
-    <TouchableHighlight style={styles.black} onPress={ () => onTap(0) }>
+    <TouchableHighlight style={styles.black} onPress={ () => onTap(0) } underlayColor='#555'>
       <Text style={styles.blackText}>{ !activePlayer ? '♔' : ''}{blackTime}</Text>
     </TouchableHighlight>
     </>
