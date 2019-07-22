@@ -34,8 +34,7 @@ export default function Play( props ) {
       <Text style={styles.whiteText}>{ activePlayer ? '♔' : ''}{whiteTime}</Text>
     </View>
     <View style={styles.black}>
-      <Text>♔</Text>
-      <Text style={styles.blackText}>{ activePlayer ? '' : '♔'}{blackTime}</Text>
+      <Text style={styles.blackText}>{ !activePlayer ? '♔' : ''}{blackTime}</Text>
     </View>
     </>
   );
