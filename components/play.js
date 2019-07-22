@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { Modal, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
+import { Button, Modal, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
 
 class Play extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modalVisible: false,
+      prevActivePlayer: -1,
     };
     
     this.handleLongPress = this.handleLongPress.bind(this);
@@ -13,12 +14,19 @@ class Play extends Component {
   }
   
   handleLongPress(){
+    this.setState({prevActivePlayer: this.props.settings.activePlayer})
+    this.props.settings.pauseGame();
     this.setModalVisible(true);
   }
 
   restartCurrentGame(){
     this.setModalVisible(false);
     this.props.settings.restartGame();
+  }
+
+  returnCurrentGame(int){
+    this.setModalVisible(false);
+    this.props.settings.changeActivePlayer(int);
   }
 
   setModalVisible(visible) {
@@ -76,42 +84,25 @@ class Play extends Component {
                   borderBottomWidth: 1,
                 }}
               />
-              <TouchableHighlight
+              <Button
+                title='Return to Game'
                 onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Return to game</Text>
-              </TouchableHighlight>
+                  this.returnCurrentGame(this.state.prevActivePlayer);
+                }} />
 
-              <View
-                style={{
-                  borderBottomColor: 'black',
-                  borderBottomWidth: 1,
-                }}
-              />
-
-              <TouchableHighlight
+              <Button
+                title='Back To Start'
                 onPress={() => {
                   backToStart();
                 }}>
-                <Text>Back To Start</Text>
-              </TouchableHighlight>
+              </Button>
 
-              <View
-                style={{
-                  borderBottomColor: 'black',
-                  borderBottomWidth: 1,
-                }}
-              />
-
-              <TouchableHighlight
+              <Button
+                title='Restart Current Game'
                 onPress={() => {
                   this.restartCurrentGame();
                 }}>
-                <Text>Restart Current Game</Text>
-              </TouchableHighlight>
-
-
+              </Button>
             </View>
           </View>
         </Modal>

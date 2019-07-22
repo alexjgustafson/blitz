@@ -18,7 +18,9 @@ export default class App extends Component {
 
     this.backToStart = this.backToStart.bind(this);
     this.beginPlay = this.beginPlay.bind(this);
+    this.changeActivePlayer = this.changeActivePlayer.bind(this);
     this.handleTap = this.handleTap.bind(this);
+    this.pauseGame = this.pauseGame.bind(this);
     this.toggleBoardPosition = this.toggleBoardPosition.bind(this);
   }
 
@@ -49,12 +51,20 @@ export default class App extends Component {
     }) );
   }
 
+  changeActivePlayer(int){
+    this.setState({activePlayer: int});
+  }
+
   handleTap( int ){
     // Taps only matter for the active player
     if ( this.state.activePlayer != int ) {
       return;
     }
     this.setState({ activePlayer: int ? 0 : 1 })
+  }
+
+  pauseGame(){
+    this.changeActivePlayer(-1);
   }
 
   toggleBoardPosition(){
@@ -79,6 +89,8 @@ export default class App extends Component {
       onTap: this.handleTap,
       backToStart: this.backToStart,
       restartGame: this.beginPlay,
+      pauseGame: this.pauseGame,
+      changeActivePlayer: this.changeActivePlayer,
     }
 
     switch ( this.state.mode ) {
