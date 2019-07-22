@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import New from './components/new'
+import Play from './components/play'
+import Result from './components/result'
 
 export default class App extends Component {
   state = {
-    mode: 'newGame',  // newGame, play, and result
+    mode: 'new',  // new, play, and result
     timeControl: 300, // 5 minutes in seconds
     boardPosition: 0, // 0 for left, 1 for right
     whiteTime: 0,
@@ -21,10 +24,29 @@ export default class App extends Component {
   });
 
   render(){
-    return(
-        <View style={this.styles.container}>
-        <Text>Hello, world!</Text>
-        </View>
-    )
+    switch ( this.state.mode ) {
+      case 'new':
+        return(
+          <New />
+        )
+        break;
+      case 'play':
+        return(
+          <Play />
+        )
+        break;
+      case 'result':
+        return(
+          <Result />
+        )
+        break;
+      default:
+        return(
+          <View style={this.styles.container}>
+            <Text>Invalid mode</Text>
+          </View>
+        )
+        break;
+    }
   }
 }
