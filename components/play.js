@@ -1,13 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { TouchableHighlight, StyleSheet, Text, View } from 'react-native';
 
 export default function Play( props ) {
-  const {activePlayer, boardPosition, blackTime, whiteTime} = props.settings;
+  const {activePlayer, blackTime, boardPosition, onTap, whiteTime} = props.settings;
   const styles = StyleSheet.create({
     black: {
       flex: 1,
       backgroundColor: '#000',
-      color: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -30,12 +29,12 @@ export default function Play( props ) {
 
   return (
     <>
-    <View style={styles.white}>
+    <TouchableHighlight style={styles.white} onPress={ () => onTap(1) }>
       <Text style={styles.whiteText}>{ activePlayer ? '♔' : ''}{whiteTime}</Text>
-    </View>
-    <View style={styles.black}>
+    </TouchableHighlight>
+    <TouchableHighlight style={styles.black} onPress={ () => onTap(0) }>
       <Text style={styles.blackText}>{ !activePlayer ? '♔' : ''}{blackTime}</Text>
-    </View>
+    </TouchableHighlight>
     </>
   );
 }
