@@ -1,17 +1,22 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import New from './components/new'
+import Start from './components/start'
 import Play from './components/play'
 import Result from './components/result'
 
 export default class App extends Component {
-  state = {
-    mode: 'new',  // new, play, and result
-    timeControl: 300, // 5 minutes in seconds
-    boardPosition: 0, // 0 for left, 1 for right
-    whiteTime: 0,
-    blackTime: 0,
-    activePlayer: -1, // -1 to pause game, 0 for black to decrement, 1 for white to decrement
+  constructor(props){
+    super(props);
+    this.state = {
+      mode: 'start',  // start, play, and result
+      timeControl: 300, // 5 minutes in seconds
+      boardPosition: false, // false for left, true for right
+      whiteTime: 0,
+      blackTime: 0,
+      activePlayer: -1, // -1 to pause game, 0 for black to decrement, 1 for white to decrement
+    }
+
+    this.toggleBoardPosition = this.toggleBoardPosition.bind(this);
   }
 
   styles = StyleSheet.create({
@@ -23,11 +28,19 @@ export default class App extends Component {
     },
   });
 
+  toggleBoardPosition(){
+    this.setState( prevState => ( {
+      boardPosition: !prevState.boardPosition
+    } ) )
+  }
+
   render(){
-    switch ( this.state.mode ) {
-      case 'new':
+    const {boardPosition, mode} = this.state;
+    
+    switch ( mode ) {
+      case 'start':
         return(
-          <New />
+          <Start boardPosition={boardPosition} onBoardPositionChange={this.toggleBoardPosition} />
         )
         break;
       case 'play':
