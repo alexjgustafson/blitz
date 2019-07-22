@@ -3,14 +3,19 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import moment from 'moment';
 
 export default function Start( props ) {
-  const {boardPosition, onBoardPositionChange, timeControl} = props.settings;
+  const {boardPosition, onBoardPositionChange, onPlay, timeControl} = props.settings;
 
   return (
+    <>
     <View style={styles.container}>
       <Text>Time control is: {moment.duration(timeControl, 'seconds').asMinutes()} minutes.</Text>
+    </View>
+    <View style={styles.container}>
       <Button onPress={() => onBoardPositionChange()} title="Toggle Board Position"></Button>
       <Text>Board position is {boardPosition ? `Right` : `Left`}</Text>
+      <Button onPress={() => onPlay()} title="Play"></Button>
     </View>
+    </>
   );
 }
 

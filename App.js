@@ -16,6 +16,7 @@ export default class App extends Component {
       activePlayer: -1, // -1 to pause game, 0 for black to decrement, 1 for white to decrement
     }
 
+    this.beginPlay = this.beginPlay.bind(this);
     this.toggleBoardPosition = this.toggleBoardPosition.bind(this);
   }
 
@@ -28,6 +29,15 @@ export default class App extends Component {
     },
   });
 
+  beginPlay(){
+    this.setState(prevState => ({
+      mode: 'play',
+      whiteTime: prevState.timeControl,
+      blackTime: prevState.timeControl,
+      activePlayer: 1
+    }) );
+  }
+
   toggleBoardPosition(){
     this.setState( prevState => ( {
       boardPosition: !prevState.boardPosition
@@ -38,6 +48,7 @@ export default class App extends Component {
     const startSettings = {
       boardPosition: this.state.boardPosition,
       onBoardPositionChange: this.toggleBoardPosition,
+      onPlay: this.beginPlay,
       timeControl: this.state.timeControl,
     };
 
