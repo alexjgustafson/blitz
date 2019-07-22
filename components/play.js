@@ -9,10 +9,16 @@ class Play extends Component {
     };
     
     this.handleLongPress = this.handleLongPress.bind(this);
+    this.restartCurrentGame = this.restartCurrentGame.bind(this);
   }
   
   handleLongPress(){
-    this.setModalVisible(true)
+    this.setModalVisible(true);
+  }
+
+  restartCurrentGame(){
+    this.setModalVisible(false);
+    this.props.settings.restartGame();
   }
 
   setModalVisible(visible) {
@@ -63,14 +69,26 @@ class Play extends Component {
         >
           <View style={{marginTop: 22}}>
             <View>
+              <Text>The game is paused</Text>
+              <View
+                style={{
+                  borderBottomColor: 'black',
+                  borderBottomWidth: 1,
+                }}
+              />
               <TouchableHighlight
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
                 }}>
-                <Text>Hide Modal</Text>
+                <Text>Return to game</Text>
               </TouchableHighlight>
 
-              <Text>---</Text>
+              <View
+                style={{
+                  borderBottomColor: 'black',
+                  borderBottomWidth: 1,
+                }}
+              />
 
               <TouchableHighlight
                 onPress={() => {
@@ -79,7 +97,20 @@ class Play extends Component {
                 <Text>Back To Start</Text>
               </TouchableHighlight>
 
-              <Text>---</Text>
+              <View
+                style={{
+                  borderBottomColor: 'black',
+                  borderBottomWidth: 1,
+                }}
+              />
+
+              <TouchableHighlight
+                onPress={() => {
+                  this.restartCurrentGame();
+                }}>
+                <Text>Restart Current Game</Text>
+              </TouchableHighlight>
+
 
             </View>
           </View>

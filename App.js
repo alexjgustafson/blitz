@@ -45,7 +45,7 @@ export default class App extends Component {
       mode: 'play',
       whiteTime: prevState.timeControl,
       blackTime: prevState.timeControl,
-      activePlayer: 0
+      activePlayer: 1
     }) );
   }
 
@@ -77,7 +77,8 @@ export default class App extends Component {
       blackTime: this.state.blackTime,
       activePlayer: this.state.activePlayer, 
       onTap: this.handleTap,
-      backToStart: this.backToStart
+      backToStart: this.backToStart,
+      restartGame: this.beginPlay,
     }
 
     switch ( this.state.mode ) {
