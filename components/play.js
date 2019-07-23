@@ -49,6 +49,17 @@ class Play extends Component {
       container: {
         flex: 1,
       },
+      modalSection: {
+        alignItems: 'center',
+        backgroundColor: '#ccc',
+        flex: 1,
+        justifyContent: 'center',
+        width: '100%',
+      },
+      pauseText: {
+        fontSize: 22,
+        textTransform: 'uppercase',
+      },
       rotateWrapper: {
         transform: [{ rotate: boardPosition ? '-90deg' : '90deg' }],    
       },
@@ -101,32 +112,31 @@ class Play extends Component {
           transparent={false}
           visible={this.state.modalVisible}
         >
-          <View style={{marginTop: 22}}>
-            <View>
-              <Text>The game is paused</Text>
-              <View
-                style={{
-                  borderBottomColor: 'black',
-                  borderBottomWidth: 1,
-                }}
-              />
+          <View style={styles.modalSection}> 
+            <View style={styles.modalSection}>
+              <Text style={styles.pauseText}>Paused</Text>
+            </View>
+            <View style={styles.modalSection}>
               <Button
-                title='Return to Game'
+                title='Play'
                 onPress={() => {
                   this.returnCurrentGame(this.state.prevActivePlayer);
-                }} />
-
-              <Button
-                title='Back To Start'
-                onPress={() => {
-                  backToStart();
                 }}>
               </Button>
-
+            </View>
+            <View style={styles.modalSection}>
               <Button
-                title='Restart Current Game'
+                title='Restart'
                 onPress={() => {
                   this.restartCurrentGame();
+                }}>
+              </Button>
+            </View>
+            <View style={styles.modalSection}>
+              <Button
+                title='Start New Game'
+                onPress={() => {
+                  backToStart();
                 }}>
               </Button>
             </View>
