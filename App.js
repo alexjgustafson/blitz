@@ -11,6 +11,7 @@ export default class App extends Component {
       activePlayer: -1, // -1 to pause game, 0 for black to decrement, 1 for white to decrement
       blackTime: 0,
       boardPosition: false, // false for left, true for right
+      losingPlayer: -1,
       mode: 'start',  // start, play, and result
       timeControl: 300000, // 5 minutes in milliseconds
       whiteTime: 0,
@@ -67,8 +68,9 @@ export default class App extends Component {
     //Check to see if someone has lost on time
     const zeroTime = prevState.blackTime <= 0 || prevState.whiteTime <=0 ;
     const playMode = prevState.mode == 'play';
-    if( zeroTime && playMode ){
-      return this.lossOnTime();
+    const notPaused = prevState.activePlayer != -1;
+    if( zeroTime && playMode && notPaused){
+      return this.lossOnTime(prevState.activePlayer);
     }
   }
 
@@ -84,8 +86,11 @@ export default class App extends Component {
     this.setState({ activePlayer: int ? 0 : 1 })
   }
 
-  lossOnTime(){
-    this.setState({mode: 'result'});
+  lossOnTime( losingPlayer ){
+    this.setState({
+      mode: 'result',
+      losingPlayer: losingPlayer,
+    });
     clearInterval(this.timerID);
   }
 
@@ -149,7 +154,7 @@ export default class App extends Component {
         break;
       case 'result':
         return(
-          <Result />
+          <Result losingPlayer={this.state.losingPlayer} />
         )
         break;
       default:
