@@ -9,7 +9,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       mode: 'start',  // start, play, and result
-      timeControl: 300, // 5 minutes in seconds
+      timeControl: 300000, // 5 minutes in milliseconds
       boardPosition: false, // false for left, true for right
       whiteTime: 0,
       blackTime: 0,
@@ -55,6 +55,10 @@ export default class App extends Component {
     this.setState({activePlayer: int});
   }
 
+  componentDidMount(){
+    this.runTheClock();
+  }
+
   handleTap( int ){
     // Taps only matter for the active player
     if ( this.state.activePlayer != int ) {
@@ -65,6 +69,19 @@ export default class App extends Component {
 
   pauseGame(){
     this.changeActivePlayer(-1);
+  }
+
+  runTheClock(){
+    //Stop any previous timers
+    //Don't run clock if we're not in play mode
+    if( this.state.mode != 'play'){
+      return;
+    }
+    //Don't run clock if theres not an active player (paused)
+    if( this.state.activePlayer == -1 ){
+      return;
+    }
+    //
   }
 
   toggleBoardPosition(){

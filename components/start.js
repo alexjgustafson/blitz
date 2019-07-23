@@ -8,7 +8,7 @@ export default function Start( props ) {
   return (
     <>
     <View style={styles.container}>
-      <Text>Time control is: {moment.duration(timeControl, 'seconds').asMinutes()} minutes.</Text>
+      <Text>Time control is: {moment.duration(timeControl).asMinutes()} minutes.</Text>
     </View>
     <View style={styles.container}>
       <Button onPress={() => onBoardPositionChange()} title="Toggle Board Position"></Button>
