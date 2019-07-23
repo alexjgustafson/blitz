@@ -49,6 +49,12 @@ class Play extends Component {
       container: {
         flex: 1,
       },
+      modalSection: {
+        alignItems: 'center',
+        flex: 1,
+        justifyContent: 'center',
+        width: '100%',
+      },
       rotateWrapper: {
         transform: [{ rotate: boardPosition ? '-90deg' : '90deg' }],    
       },
@@ -101,28 +107,27 @@ class Play extends Component {
           transparent={false}
           visible={this.state.modalVisible}
         >
-          <View style={{marginTop: 22}}>
-            <View>
+          <View style={styles.modalSection}> 
+            <View style={styles.modalSection}>
               <Text>The game is paused</Text>
-              <View
-                style={{
-                  borderBottomColor: 'black',
-                  borderBottomWidth: 1,
-                }}
-              />
+            </View>
+            <View style={styles.modalSection}>
               <Button
                 title='Return to Game'
                 onPress={() => {
                   this.returnCurrentGame(this.state.prevActivePlayer);
-                }} />
-
+                }}>
+              </Button>
+            </View>
+            <View style={styles.modalSection}>
               <Button
                 title='Back To Start'
                 onPress={() => {
                   backToStart();
                 }}>
               </Button>
-
+            </View>
+            <View style={styles.modalSection}>
               <Button
                 title='Restart Current Game'
                 onPress={() => {
