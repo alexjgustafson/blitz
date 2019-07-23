@@ -63,6 +63,15 @@ export default class App extends Component {
     );
   }
 
+  componentDidUpdate(prevProps, prevState){
+    //Check to see if someone has lost on time
+    const zeroTime = prevState.blackTime <= 0 || prevState.whiteTime <=0 ;
+    const playMode = prevState.mode == 'play';
+    if( zeroTime && playMode ){
+      return this.lossOnTime();
+    }
+  }
+
   componentWillUnmount(){
     clearInterval(this.timerID);
   }
@@ -73,6 +82,11 @@ export default class App extends Component {
       return;
     }
     this.setState({ activePlayer: int ? 0 : 1 })
+  }
+
+  lossOnTime(){
+    this.setState({mode: 'result'});
+    clearInterval(this.timerID);
   }
 
   pauseGame(){
