@@ -11,6 +11,8 @@ During the game, any player can long-press the clock to pause the game.
 
 Once one play runs out of time, a result page is presented.
 
+See `sketch.pdf` for the initial wireframe notes that started this.
+
 ## Development
 Requires Node 10+, Yarn, and Expo
 Clone this repo to your development environment.
