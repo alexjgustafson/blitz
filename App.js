@@ -8,13 +8,13 @@ export default class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+      activePlayer: -1, // -1 to pause game, 0 for black to decrement, 1 for white to decrement
+      blackTime: 0,
+      boardPosition: false, // false for left, true for right
       mode: 'start',  // start, play, and result
       timeControl: 300000, // 5 minutes in milliseconds
-      boardPosition: false, // false for left, true for right
       whiteTime: 0,
-      blackTime: 0,
-      activePlayer: -1, // -1 to pause game, 0 for black to decrement, 1 for white to decrement
-    }
+    };
 
     this.backToStart = this.backToStart.bind(this);
     this.beginPlay = this.beginPlay.bind(this);
@@ -56,7 +56,15 @@ export default class App extends Component {
   }
 
   componentDidMount(){
-    this.runTheClock();
+    const decrementInterval = 100;
+    this.timerID = setInterval(
+      () => this.spendTime(decrementInterval),
+      decrementInterval
+    );
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.timerID);
   }
 
   handleTap( int ){
@@ -71,17 +79,21 @@ export default class App extends Component {
     this.changeActivePlayer(-1);
   }
 
-  runTheClock(){
-    //Stop any previous timers
-    //Don't run clock if we're not in play mode
-    if( this.state.mode != 'play'){
-      return;
-    }
-    //Don't run clock if theres not an active player (paused)
-    if( this.state.activePlayer == -1 ){
-      return;
-    }
-    //
+  spendTime( int ){
+    this.setState( function(state){
+      //Don't run clock if we're not in play mode
+      if( state.mode != 'play'){
+        return state;
+      }
+      //Don't run clock if theres not an active player (paused)
+      if( state.activePlayer == -1 ){
+        return state;
+      }
+      return {
+        whiteTime: state.activePlayer ? state.whiteTime - int : state.whiteTime,
+        blackTime: state.activePlayer ? state.blackTime : state.blackTime - int,
+      };
+    } );
   }
 
   toggleBoardPosition(){
