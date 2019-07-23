@@ -1,11 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {Button, StyleSheet, Text, View } from 'react-native';
 
 export default function Result( props ) {
-  const {losingPlayer} = props;
+  const {losingPlayer, backToStart} = props;
   return (
     <View style={styles.container}>
       <Text>{losingPlayer ? 'White' : 'Black'} lost on time.</Text>
+      <Button
+        title='Back To Start'
+        onPress={() => {
+          backToStart();
+        }}>
+      </Button>
     </View>
   );
 }

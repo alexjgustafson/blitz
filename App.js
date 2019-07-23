@@ -91,7 +91,6 @@ export default class App extends Component {
       mode: 'result',
       losingPlayer: losingPlayer,
     });
-    clearInterval(this.timerID);
   }
 
   pauseGame(){
@@ -154,7 +153,7 @@ export default class App extends Component {
         break;
       case 'result':
         return(
-          <Result losingPlayer={this.state.losingPlayer} />
+          <Result backToStart={this.backToStart} losingPlayer={this.state.losingPlayer} />
         )
         break;
       default:
