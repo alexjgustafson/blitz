@@ -14,6 +14,7 @@ export default class App extends Component {
       losingPlayer: -1, // Use the same values as active player once we have a loser
       mode: 'start',  // 'start', 'play', and 'result' are valid
       timeControl: 300000, // 300000 = 5 minutes in milliseconds
+      timeControlEditable: false,
       whiteTime: 0,
     };
 
@@ -23,6 +24,8 @@ export default class App extends Component {
     this.handleTap = this.handleTap.bind(this);
     this.pauseGame = this.pauseGame.bind(this);
     this.toggleBoardPosition = this.toggleBoardPosition.bind(this);
+    this.updateTimeControlEditable = this.updateTimeControlEditable.bind(this);
+    this.updateTimeControlValue = this.updateTimeControlValue.bind(this);
   }
 
   styles = StyleSheet.create({
@@ -120,12 +123,23 @@ export default class App extends Component {
     } ) )
   }
 
+  updateTimeControlEditable(bool){
+    this.setState({timeControlEditable: bool});
+  }
+
+  updateTimeControlValue(int){
+    this.setState({timeControl: int});
+  }
+
   render(){    
     const startSettings = {
       boardPosition: this.state.boardPosition,
       onBoardPositionChange: this.toggleBoardPosition,
       onPlay: this.beginPlay,
       timeControl: this.state.timeControl,
+      timeControlEditable: this.state.timeControlEditable,
+      updateTimeControlEditable: this.updateTimeControlEditable,
+      updateTimeControlValue: this.updateTimeControlValue,
     };
 
     const playSettings = {
