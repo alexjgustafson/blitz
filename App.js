@@ -13,7 +13,7 @@ export default class App extends Component {
       boardPosition: false, // false for left, true for right
       losingPlayer: -1, // Use the same values as active player once we have a loser
       mode: 'start',  // 'start', 'play', and 'result' are valid
-      timeControl: 300000, // 300000 = 5 minutes in milliseconds
+      timeControl: 2000, // 300000 = 5 minutes in milliseconds
       timeControlEditable: false,
       whiteTime: 0,
     };
