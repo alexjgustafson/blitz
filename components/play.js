@@ -51,9 +51,14 @@ class Play extends Component {
       },
       modalSection: {
         alignItems: 'center',
+        backgroundColor: '#ccc',
         flex: 1,
         justifyContent: 'center',
         width: '100%',
+      },
+      pauseText: {
+        fontSize: 22,
+        textTransform: 'uppercase',
       },
       rotateWrapper: {
         transform: [{ rotate: boardPosition ? '-90deg' : '90deg' }],    
@@ -109,11 +114,11 @@ class Play extends Component {
         >
           <View style={styles.modalSection}> 
             <View style={styles.modalSection}>
-              <Text>The game is paused</Text>
+              <Text style={styles.pauseText}>Paused</Text>
             </View>
             <View style={styles.modalSection}>
               <Button
-                title='Return to Game'
+                title='Play'
                 onPress={() => {
                   this.returnCurrentGame(this.state.prevActivePlayer);
                 }}>
@@ -121,17 +126,17 @@ class Play extends Component {
             </View>
             <View style={styles.modalSection}>
               <Button
-                title='Back To Start'
+                title='Restart'
                 onPress={() => {
-                  backToStart();
+                  this.restartCurrentGame();
                 }}>
               </Button>
             </View>
             <View style={styles.modalSection}>
               <Button
-                title='Restart Current Game'
+                title='Start New Game'
                 onPress={() => {
-                  this.restartCurrentGame();
+                  backToStart();
                 }}>
               </Button>
             </View>
