@@ -13,6 +13,13 @@ class Start extends Component {
     this.saveTimeControl = this.saveTimeControl.bind(this);
   }
 
+  displayMinutes(int){
+    if( int >= 10){
+      return int.toString();
+    }
+    return `0${int}`;
+  }
+
   getRemainderSeconds( int ){
     return int % 60;
   }
@@ -52,7 +59,7 @@ class Start extends Component {
         { !timeControlEditable && 
         <TouchableWithoutFeedback 
           onPress={() => updateTimeControlEditable(true)}>
-          <Text>{this.state.timeControlMinutes}:{this.state.timeControlSeconds}</Text>
+          <Text>{this.state.timeControlMinutes ? this.state.timeControlMinutes : '00'}:{this.displayMinutes(this.state.timeControlSeconds)}</Text>
         </TouchableWithoutFeedback> }
         { timeControlEditable &&
           <View>
@@ -72,11 +79,15 @@ class Start extends Component {
           />
           <Text>Seconds</Text>
           <TextInput
-            label= 'Seconds'
+            label='Seconds'
+            maxLength={2}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(text) => {
               if( '' == text ){
                 return this.setState({timeControlSeconds: null});
+              }
+              if( parseInt(text) >= 60 ){
+                return this.setState({timeControlSeconds: 59});
               }
               this.setState({timeControlSeconds: parseInt(text)})
             }}
