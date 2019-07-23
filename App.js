@@ -154,6 +154,11 @@ export default class App extends Component {
       changeActivePlayer: this.changeActivePlayer,
     }
 
+    const resultSettings = {
+      backToStart: this.backToStart,
+      losingPlayer: this.state.losingPlayer,
+    }
+
     switch ( this.state.mode ) {
       case 'start':
         return(
@@ -167,7 +172,7 @@ export default class App extends Component {
         break;
       case 'result':
         return(
-          <Result backToStart={this.backToStart} losingPlayer={this.state.losingPlayer} />
+          <Result settings={resultSettings} />
         )
         break;
       default:
