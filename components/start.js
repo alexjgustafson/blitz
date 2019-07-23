@@ -45,21 +45,30 @@ class Start extends Component {
     const {boardPosition, onBoardPositionChange, onPlay, timeControlEditable, updateTimeControlEditable} = this.props.settings;
   
     const styles = StyleSheet.create({
-      container: {
+      white: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
       },
+      black: {
+        flex: 1,
+        backgroundColor: '#333',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      timeDisplay:{
+        fontSize: 48,
+      },
     });
 
     return (
       <>
-      <View style={styles.container}>
+      <View style={styles.white}>
         { !timeControlEditable && 
         <TouchableWithoutFeedback 
           onPress={() => updateTimeControlEditable(true)}>
-          <Text>{this.state.timeControlMinutes ? this.state.timeControlMinutes : '00'}:{this.displayMinutes(this.state.timeControlSeconds)}</Text>
+          <Text style={styles.timeDisplay}>{this.state.timeControlMinutes ? this.state.timeControlMinutes : '00'}:{this.displayMinutes(this.state.timeControlSeconds)}</Text>
         </TouchableWithoutFeedback> }
         { timeControlEditable &&
           <View>
@@ -102,7 +111,7 @@ class Start extends Component {
           </View>
         }
       </View>
-      <View style={styles.container}>
+      <View style={styles.black}>
         <Button onPress={() => onBoardPositionChange()} title="Toggle Board Position"></Button>
         <Text>Board position is {boardPosition ? `Right` : `Left`}</Text>
         <Button onPress={() => onPlay()} title="Play"></Button>
