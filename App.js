@@ -11,9 +11,9 @@ export default class App extends Component {
       activePlayer: -1, // -1 to pause game, 0 for black to decrement, 1 for white to decrement
       blackTime: 0,
       boardPosition: false, // false for left, true for right
-      losingPlayer: -1,
-      mode: 'start',  // start, play, and result
-      timeControl: 300000, // 5 minutes in milliseconds
+      losingPlayer: -1, // Use the same values as active player once we have a loser
+      mode: 'start',  // 'start', 'play', and 'result' are valid
+      timeControl: 300000, // 300000 = 5 minutes in milliseconds
       whiteTime: 0,
     };
 
